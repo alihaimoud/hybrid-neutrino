@@ -73,15 +73,15 @@ Note that in the LRA we assume that fast neutrinos are completely correlated wit
 
 > 18.	In Figs. 10 and 11 there is a sudden drop of power at k~0.15 h/Mpc. Do authors know the reason for it? That feature seems to appear in both the hybrid and linear response method and not in the particle method and is clearly not physical.
 
-==TODO==
+We thank the referee for pointing this out. We had omitted to rebin our LRA neutrino power spectra to ensure sufficient modes in each bin. Due to an unlucky bin boundary that particular point contained only 8 modes and was suffering from sample variance. We have rebinned the linear response power to ensure that all bins have at least 30 modes in them. Since this naturally reduced scatter between our simulations, we took the opportunity to reduce the level of smoothing in our neutrino power spectrum comparisons; we now use a 4 bin moving average, instead of an 11-bin one.
 
 > 19.	Authors reach the conclusion that the dip at k~1 h/Mpc is due to shot-noise from fast moving neutrinos. While they justify it with the results of the HYBRID-v5000 simulation, I find hard to believe that shot-noise from fast neutrinos can produce such sharp feature. Can authors show the results of that figure at z=0.5?
 
-We do not regard this feature as especially sharp, as the total amplitude is only a few percent. We think it comes from the transition from shot-noise-dominated to structure-dominated. We attach the plot at z=0.5 and z=0.2; the feature is still present, at the same scale, but somewhat smaller. We found that shot noise interacted with our tree code in complex non-linear ways.
+We do not regard this feature as especially sharp (especially with the reduced smoothing), as the total amplitude is only a few percent. We think it comes from the transition from shot-noise-dominated to structure-dominated. We attach the plot at z=0.5 and z=0.2; the feature is still present, at the same scale, but somewhat smaller. Notice that it is much smaller and less sharp with the 1024^3 simulation than with the 512^3 simulation.
 
 > 20.	Fig. 12. Please add the linear theory prediction by CAMB or CLASS.
 
-We have done so. Neither the particle nor the hybrid methods agree particularly well with CAMB (although LINRESP does) - some of this may be a small amount of non-linear growth present even on large scales, but most likely it is numerical integration error. 5% convergence was about the best we could do for the neutrino power spectrum, and we consider it acceptable for a quantity which is such a small fraction of the total matter density.
+We have done so, and added a few sentences of text about it.
 
 > 21.	Authors say that their method allow them to make zoom-in simulations. Are authors sure about this? Even for velocities of ~800 km/s neutrinos can travel a rather large distance that I think cannot be fully accounted for in zoom-in simulations.
 
@@ -89,4 +89,4 @@ We're not completely sure (we haven't tried yet), but our intention was to perfo
 
 > 22.	Authors should discuss why they choose to follow slow neutrino tracers already from the initial conditions while the approach employed by Brandbyge & Hannestad did not. I notice that in the latter, since neutrinos are introduced at later times, the slow neutrinos are not affected by shot-noise. I find this the largest disadvantage of the hybrid method presented here.
 
-We have now discussed this in the introduction, and in the first paragraph of section 3.2. We did attempt introducing particles dynamically at later times initially, but we found this less accurate, because the split is in the unperturbed velocity (notice that B&H 2010 use a different splitting criterion), and because computing the phase of the newly introduced neutrinos was non-trivial. We also found that it significantly increased the implementation complexity.
+We have now discussed this in the introduction, and in the first paragraph of section 3.2. We did attempt introducing particles dynamically at later times initially, but we found this less accurate, because the split is in the unperturbed velocity (notice that B&H 2010 use a different splitting criterion), whereas a dynamical splitting naturally uses the perturbed velocity. We also found that accurately computing the phase of the newly introduced neutrinos was non-trivial and significantly increased the implementation complexity. Note that the slow neutrinos are not strongly affected by shot noise in our approach either, because they cluster strongly by the time they cease to be passive tracers.
