@@ -25,7 +25,7 @@ We have amended the sentence and modified that paragraph. We note also that one 
 
 > 6.	I am very surprised that authors do not cite the hybrid method of Brandbyge & Hannestad 2010 in the introduction and they only add it in a footnote, as that method is very similar to the one of the authors. Please cite in the introduction that work and compare it with the method developed by the authors, showing the advantages/disadvantages of using each.
 
-This was certainly an oversight! We have added a detailed discussion of B&H 2010 making explicit the differences between them, and where we feel our new method improves upon it.
+This was certainly an oversight! We have added a detailed discussion of B&H 2010 making explicit the differences between them, and where our new method improves upon it.
 
 > 7.	Authors do not discuss all the different methods to implement neutrinos. For instance, Dakin et al 2018 (1712.03944), introduced a new a very efficient method. Please cite that method in the introduction and compare it with the one by the authors.
 
@@ -61,7 +61,7 @@ The apparent better agreement of the particle simulation is due to non-linear gr
 
 > 15.	I find Fig. 7 very worrisome as it does not exhibit the classic spoon-shape. Works using similar neutrino masses and with different hierarchies have found that feature, e.g. 1203.5342, or 1711.10524, so authors should understand why it does not show up in their simulations.
 
-This is, we think, a fluke of our limited resolution and our particular realisation. The spoon shape is present at z=0.2 and z=0.5 (see the new figure), and is simply suppressed at z=0, probably by a chance coincidence with the formation of a large halo.
+This is, we think, a fluke of this particular snapshot. The spoon shape is present in all other output redshifts except z=0 (see the new figure). The upturn occurs because once objects virialise they lose memory of their initial conditions. On small scales the power is dominated by a 1-halo term, usually a single large object for these small boxes. We suspect that by coincidence the largest object in the box at z=0 has recently formed and is not yet fully virialised. Given that the expected upturn in the spoon is only a few percent, this is not implausible.
 
 > 16.	I am also concerned about Fig. 9, where authors show that the cross-correlation coefficient between fast neutrinos and CDM is not 1 on k<0.06 h/Mpc, but slightly lower (~0.985-0.99). A 1% change on such large scales can have a non-negligible impact that authors should address.
 
@@ -69,7 +69,7 @@ It is unity for the hybrid particles, and becomes sub-unity only for the fastest
 
 > 17.	Can authors plot the cross-correlation coefficient between fast and slow neutrinos to justify the way they compute the neutrino power spectrum in hybrid simulations (they assume they are completely correlated on all scales).
 
-Note that in the LRA we assume that fast neutrinos are completely correlated with the CDM. So the requested plot would be the same as Figure 9. As explained in 5.3.2 at k > 0.5 h/Mpc, the first scale where the neutrinos are decorrelated with the CDM, the slow neutrinos strongly dominate the power, so that the cross-correlation between fast and slow neutrinos is irrelevant.
+Note that in the LRA we assume that fast neutrinos are completely correlated with the CDM (we demonstrate explicitly that this approximation is accurate). So the requested plot would be the same as Figure 9. As explained in 5.3.2 at k > 0.5 h/Mpc, the first scale where the neutrinos are decorrelated with the CDM, the slow neutrinos strongly dominate the power, so that the cross-correlation between fast and slow neutrinos is irrelevant.
 
 > 18.	In Figs. 10 and 11 there is a sudden drop of power at k~0.15 h/Mpc. Do authors know the reason for it? That feature seems to appear in both the hybrid and linear response method and not in the particle method and is clearly not physical.
 
