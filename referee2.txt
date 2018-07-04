@@ -1,0 +1,136 @@
+> I thank the authors for their answers. Unfortunately, the paper is not ready for publication yet as some of the results and claims by the authors are in contradiction with previous works. Besides, they still need to show clearly that linear theory is better reproduced by the hybrid method than by the particle method.
+>
+> 5.      Authors write that Banerjee et al. 2018 pointed out that neutrino shot-noise can be considerably reduced by densely sampling the full neutrino velocity distribution at each grid point. The reason why that method works is not only due a dense sampling of the Fermi-Dirac distribution. Please correct it.
+>
+>
+> We have amended the sentence and modified that paragraph. We note also that one way they suppress the effect of shot noise is to disable the short-range force for z>9, which will work well even for standard particle neutrinos.
+>
+>
+> I have the feeling that authors have not understood the method proposed in Banerjee et al, as their new description does not > correspond with that method. I’m very surprised by the claim that disabling the short-range force will suppress the shot-noise. The first implementation of the particle method performed in Gadget-III (Viel et al. 2010) did not have the tree on, and > shot-noise was present in the same way as in simulations with the tree on (see their Fig. 8).
+
+Note that we are not claiming that shot noise is not present when the short-range force is disabled, merely that the effect of shot noise on the gravitational potential will be suppressed. If the short-range force is disabled, small scale fluctuations in the gravitational potential by reducing the resolution of the gravitational force, because neutrinos are more homogeneous on larger scales.
+
+We have significantly expanded and clarified our discussion of both shot noise and the method of Banerjee et al as follows:
+
+"Finally, in the standard method of initializing particle simulations, the initial velocity of each neutrino particle is random in magnitude and direction. After a few timesteps the positions of neutrino particles are also effectively randomized. The power spectrum of neutrino particles, $P_\nu$, will include a scale invariant white noise term, $P_\mathrm{N} \propto 1/N_\mathrm{part}$, called shot noise. At early times and on small scales this shot noise dominates over the small intrinsic perturbations of the neutrino fluid. Shot noise has a simple analytic form which is easy to subtract from any quantity of interest and is thus not intrinsically a problem for particle simulations. However, the effect of shot noise on the gravitational potential may lead to errors, including in some cases the formation of spurious structures (Wang & White 2007)."
+
+"Finally, Banerjee+ 2018 alter the standard way of initializing neutrino particles. Instead of assigning each neutrino particle on a grid a random thermal velocity, they assign a predetermined specific magnitude and direction to multiple neutrino particles distributed on a coarser grid. Multiple grids are used to sample the Fermi-Dirac distribution, with the direction of the neutrino particles' velocity distributed as isotropically as possible within each grid. This substantially suppresses shot noise, although Brandbyge+2018 showed that it can induce spurious correlations between neutrinos, especially those with initially large momenta."
+
+> 6.      I am very surprised that authors do not cite the hybrid method of Brandbyge & Hannestad 2010 in the introduction and they only add it in a footnote, as that method is very similar to the one of the authors. Please cite in the introduction that work and compare it with the method developed by the authors, showing the advantages/disadvantages of using each.
+>
+>
+> This was certainly an oversight! We have added a detailed discussion of B&H 2010 making explicit the differences between them, and where our new method improves upon it.
+>
+>
+> Authors have stated where their method improves upon, but not where it performs worse, like in the fact that they have a residual shot-noise and that the dynamic creation of particles is computationally more efficient.
+>
+
+We have rewritten the paragraph comparing our method with that of Brandbyge & Hannestad, which should hopefully clarify the issues raised by the referee. We emphasize that particle neutrinos are not used to compute the density field until $z_\nu$, hence our simulations do not suffer from any shot noise at $z > z_\nu$. Our method performs within a few tens of percent of the CPU time of a pure dark matter simulation, and while BH10 do not discuss the performance of the hybrid method in detail, we would expect it to be similar.
+
+"Our hybrid method is conceptually similar to the pioneering hybrid method of Brandbyge & Hannestad 2010, hereafter BH10. In both methods fast neutrinos are followed using analytic approximations, while particles are used for sufficiently slow neutrinos below a cutoff redshift. However, our method improves on BH10 in several ways. First, we use the linear-response approximation for fast neutrinos, instead of full linear theory as in BH10. At no additional cost, this allows us to appropriately capture (i) the increased neutrino perturbations due to the deepening of gravitational potentials beyond linear theory and (ii) better approximate the phases of neutrino perturbations, which, like the CDM, de-correlate from their initial distribution due to large-scale bulk motions (see e.g. Tassev & Zaldarriaga 2012). Secondly, we initialize all particle neutrinos at the onset of the simulations, although we only use particle neutrinos as tracer (non-gravitating) particles until $z_\nu$. This differs from BH10, who initialize neutrinos dynamically as the thermal velocity of each neutrino bin drops below the gravitational flow velocity measured from the CDM. By the late time at which particle neutrinos are actually used to compute density perturbations, their positions and velocities are very accurate. In particular, this allows us to capture the non-trivial correlations between thermal and bulk velocities, as opposed to BH10’s assumption that they are completely uncorrelated. Such correlations are expected because neutrinos with different thermal motions are deflected differently by gravitational potentials, even if their initial thermal velocities have the same magnitude. Last but not least, we split neutrinos into ``slow” and “fast” particles according to their unperturbed velocity, rather than momentum. Our splitting criterion, which we justify in detail, can thus be employed, unaltered, for any neutrino mass."
+
+> 8.      In footnote 8 authors write that they compute the matter power spectrum by adding the CDM power spectrum to the neutrino power spectrum. What do they do with the CDM-NU cross-power spectrum?
+>
+>
+> Note that we assume in our LRA that the neutrinos are completely correlated with the CDM.
+>
+>
+> But in that case the matter power spectrum can not be just the sum of the CDM and neutrino power spectra, right? Only if the two components were uncorrelated the matter power spectrum will be the sum of the CDM and NU power spectra.
+>
+
+We agree, and we add the *square roots* of the CDM and NU power spectra (see Section 5.3.2). We amended the confusing footnote as follows:
+
+“We estimate the matter power spectrum by adding the neutrino component from the previous timestep assuming it is completely correlated, i.e. $P_m^{1/2} = (1 - f_\nu)P_{\rm dm}^{1/2} + f_\nu P_\nu^{1/2}$.”
+
+> 11.     Authors say that a particle simulation with 512^3 neutrino particles showed a deviation of ~1% from linear theory. Please show in a plot the matter power spectrum from the two simulations to support your claim. From Fig. 12 I can see that at the level of the neutrino Pk, that should be much severely affected by shot-noise (even after subtracting it), the agreement between the PARTICLE and PARTICLE-1024 simulations is excellent (better than the agreement between the PARTICLE and HYBRYD simulations).
+>
+>
+> We have added the PARTICLE simulation to Figure 6. Notice that the offset in the total power is similar to the offset in the neutrino power. It indeed appears initially a little odd that they are similar, since the neutrino power is a small fraction of the total matter power, but we believe this is because the effect on the total matter power increases over time, and the change in the neutrino power spectrum is much larger for z >> 1.
+>
+>
+> I find this result hard to believe. How can neutrinos alone induce a 1% offset? I notice that this disagree with previous works like Viel et al. 2010 (Fig. 9). I would suggest authors to investigate whether this is a bug in their code. If they still get the same results, I will carry out this test myself and share the results with them.
+
+Previous authors started their simulations at z=49, whereas this offset arises due to discreteness noise  between z=49 and z=99. None of AHB13, Viel 2010 or Brandbyge 2008 would have shown the discrepancy. Indeed, in AHB13, avoiding this discrepancy was precisely why we started our simulations at z=49.
+
+This error occurs due to inaccuracies in Gadget's short-range gravitational tree force, probably amplified because we do not obey the Courant condition for the neutrinos. We have checked that if we disable the short-range tree force in Gadget then our 512^3 particle neutrino simulation recovers the correct growth of power on large scales (although naturally the small-scale growth is suppressed). We attach a plot, with a 512^3 particle simulation with the tree off shown in grey as "PARTICLE" to demonstrate this (pks_rel-0_020.pdf).
+
+Newly here we have not drifted tree nodes between timesteps, instead rebuilding the tree every timestep. Drifting tree nodes induces extra noise in the matter distribution which we expect to induce an increase in power more than cancelling this error. Note it also introduces extra non-physical small-scale power. If the referee does decide to carry out their own test, be sure to set TreeDomainUpdateFrequency = 0.
+
+We have added some notes on our extra checks to the text.
+
+> 13.     Authors write that they find O(1%) differences with respect to CAMB at k<0.2 h/Mpc. I can see differences of that order on very linear scales, 0.04-0.05 h/Mpc, that are not expected and authors should justify.
+>
+>
+> These scales are close enough to the size of the box that there are very few modes available, which induces a scatter. We have added a sentence clarifying this point.
+>
+>
+> Authors are using simulations with the same random seeds, so sample variance should be highly suppressed and below 1%. I think this is not the explanation.
+
+We thank the referee for pointing this out. This was due to our not having fully accounted for the finite width of power spectrum bins when rebinning the power spectrum to ensure enough modes in each bin. The differences between hybrid, particle and LRA simulations were because a different bin size was used depending on the simulation type, so the finite bin correction was not quite the same. We have now corrected our plotting routine to use the same bin size on large scales in all cases and to account for the finite width of the bins when averaging, using the CAMB power spectrum.
+
+> 14.     Fig. 7. It seems to me that the agreement with linear theory is better for the particle simulation than for the linear response simulation. Authors should comment on this and find an explanation. Can you plot the CDM-NU cross-power spectrum for these two simulations and the comparison with linear theory? I think the CDM-NU cross-power spectrum will be much more sensible to any numerical source of error than the total matter Pk, that is dominated by CDM.
+>
+>
+> The apparent better agreement of the particle simulation is due to non-linear growth on large scales. To make this clear, we have added the z=0.5 plot, which shows that the particle simulation is lower than CAMB for k = 0.05 - k = 0.15, while the LINRESP simulation agrees.
+>
+>
+> Even at z=0.5 the agreement with linear theory is better for the red than for the blue curve. If authors think that this is a visual effect, can they plot the ratio between the matter Pk from the simulation versus CAMB directly?
+>
+
+This is indeed a visual effect, caused by the spacing of the large scale bins on a log axis. At k = 0.1 the agreement with LINRESP-MINNU is substantially better than PARTICLE-MINNU.  We have added the ratio with CAMB in the lower part of the figure, and attach the plot at z=1 (pks_lowmass_0_5.pdf) in case the referee is still unconvinced.
+
+> 15.     I find Fig. 7 very worrisome as it does not exhibit the classic spoon-shape. Works using similar neutrino masses and with different hierarchies have found that feature, e.g. 1203.5342, or 1711.10524, so authors should understand why it does not show up in their simulations.
+>
+>
+> This is, we think, a fluke of this particular snapshot. The spoon shape is present in all other output redshifts except z=0 (see the new figure). The upturn occurs because once objects virialise they lose memory of their initial conditions. On small scales the power is dominated by a 1-halo term, usually a single large object for these small boxes. We suspect that by coincidence the largest object in the box at z=0 has recently formed and is not yet fully virialised. Given that the expected upturn in the spoon is only a few percent, this is not implausible.
+>
+>
+> I’m really surprised by this explanation. Authors can find an explanation of the spoon shape in their own paper (Liu et al. 2017). The power
+> on small scales is not due to the most massive halo, but to the 1-halo term of many small halos. Thus, this can’t be the explanation and
+> points toward a bug in author’s code.
+
+We agree with the referee that the spoon shape is due to the 1-halo term of small halos, and apologise for the oversight, but we don't think this is a bug.
+
+It occurs only in one snapshot of one simulation, and it occurs in both particle and LRA simulations. If this were a bug it would have to be a bug in Gadget's short-range tree gravity, manifesting under very specific conditions. Note that in Figure 3 of AHB13 we showed that at z=0 the power spectrum suppression changed by around 1% on k = 1 - 10 when the number of CDM particles was increased. This discrepancy is thus the right size to be explained purely by particle load, and we have added a note to this effect to the text.
+
+> 16.     I am also concerned about Fig. 9, where authors show that the cross-correlation coefficient between fast neutrinos and CDM is not 1 on k<0.06 h/Mpc, but slightly lower (~0.985-0.99). A 1% change on such large scales can have a non-negligible impact that authors should address.
+>
+>
+> It is unity for the hybrid particles, and becomes sub-unity only for the fastest particles in the PARTICLE simulation (ie, exactly those for which shot noise is likely to be most important). We regard this as an unphysical numerical problem with purely particle simulations, and have added a note to that effect.
+>
+>
+> I think I may have misunderstood something important here, and I think this in contradiction with their answer to the next point. Aren’t the fast neutrino particles always followed by LRA and therefore by construction assumed to be completely correlated with CDM? Please clarify.
+
+> 17.     Can authors plot the cross-correlation coefficient between fast and slow neutrinos to justify the way they compute the neutrino power spectrum in hybrid simulations (they assume they are completely correlated on all scales).
+>
+>
+> Note that in the LRA we assume that fast neutrinos are completely correlated with the CDM (we demonstrate explicitly that this approximation is accurate). So the requested plot would be the same as Figure 9. As explained in 5.3.2 at k > 0.5 h/Mpc, the first scale where the neutrinos are decorrelated with the CDM, the slow neutrinos strongly dominate the power, so that the cross-correlation between fast and slow neutrinos is irrelevant.
+>
+>
+
+The referee is correct; in the hybrid model, the fast neutrino particles are always followed by LRA and are by construction completely correlated with CDM. However, what is plotted in Figure 9 with the label "PARTICLE 1024 (fast)" is the cross-correlation between CDM and the initially fast neutrinos in the *PARTICLE* simulation. We have taken the particles in the PARTICLE simulation, and split them by their initial momentum, so that this Figure shows only those particles which would be followed by the LRA in a hybrid simulation. We have attempted to clarify this in the text. The fact that this line is very close to unity hence justifies our assumption. The finite binning pointed out by the referee in point 13 was also affecting the cross-correlation slightly and our new plot shows a correlation of exactly unity in the largest scale bin.
+
+> 19.     Authors reach the conclusion that the dip at k~1 h/Mpc is due to shot-noise from fast moving neutrinos. While they justify it with the results of the HYBRID-v5000 simulation, I find hard to believe that shot-noise from fast neutrinos can produce such sharp feature. Can authors show the results of that figure at z=0.5?
+>
+>
+> We do not regard this feature as especially sharp (especially with the reduced smoothing), as the total amplitude is only a few percent. We think it comes from the transition from shot-noise-dominated to structure-dominated. We attach the plot at z=0.5 and z=0.2; the feature is still present, at the same scale, but somewhat smaller. Notice that it is much smaller and less sharp with the 1024^3 simulation than with the 512^3 simulation.
+>
+>
+> I did not receive the plots.
+
+Our apologies, we omitted to attach them last time. They should be in this response (pks_nu_ckrel2-0_6667.pdf and pks_nu_ckrel2-0_8333.pdf).
+
+> 20.     Fig. 12. Please add the linear theory prediction by CAMB or CLASS.
+>
+>
+> We have done so, and added a few sentences of text about it.
+>
+>
+> Can authors show the plot at z=2 they state in the text to justify their 2% accuracy?
+
+Since our updated plot now agrees very well at z=1 we have not included this in the paper, but we attach it for the referee. This shows the ratio of P_nu in particle, LRA and hybrid simulations to CAMB at z=2 (pks_nu_camb-0_3333.pdf).
+
+> So according to Fig. 12, are authors claiming that neutrinos deviate significantly from linear theory already at k=0.2 h/Mpc?
+
+At the 10% level, yes. This should not be too surprising as the non-linear scale is around k = 0.1 h/Mpc.
+
